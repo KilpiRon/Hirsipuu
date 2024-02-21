@@ -54,9 +54,13 @@ input.addEventListener("keypress", (e) => {
         if(guess.toLowerCase() === randomizedWord.toLowerCase()) {
 
         } else if (guess.length === 1) {
+            replaceFoundChars(guess)
+            if (maskedWord.toLocaleLowerCase() === randomizedWord.toLocaleLowerCase()) {
+                win()
+            }
 
         } else {
-
+            alert("You guessed wrong!")
         }
         input.value=""
     }
