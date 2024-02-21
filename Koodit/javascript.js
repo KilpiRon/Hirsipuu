@@ -17,6 +17,7 @@ const words = [
 
 let randomizedWord = ""
 let maskedWord = ""
+let guessCount = 0
 
 const newGame = () => {
     const random = Math.floor(Math.random() * 10) + 1
@@ -24,10 +25,12 @@ const newGame = () => {
     maskedWord = "*".repeat(randomizedWord.length)
     console.log(randomizedWord)
     output.innerHTML = maskedWord
+    guessCount = 0
+    span.textContent = `Guess count: ${guessCount}`
 }
 
 const win = () => {
-    alert(`You have guessed right, the word is ${randomizedWord}.`)
+    alert(`You have guessed right, the word is ${randomizedWord}. You needed ${guessCount} guesses!`)
     newGame()
 }
 
@@ -47,7 +50,7 @@ const replaceFoundChars = (guess) => {
 newGame()
 
 input.addEventListener("keypress", (e) => {
-    if (e.key === "enter") {
+    if (e.key === "Enter" || e.key === "enter") {
         e.preventDefault()
 
         const guess = input.value
@@ -58,6 +61,8 @@ input.addEventListener("keypress", (e) => {
             if (maskedWord.toLocaleLowerCase() === randomizedWord.toLocaleLowerCase()) {
                 win()
             }
+            guessCount++
+            span.textContent = `Number of guesses ${guessCount}`
 
         } else {
             alert("You guessed wrong!")
